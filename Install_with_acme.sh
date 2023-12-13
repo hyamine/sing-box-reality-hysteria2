@@ -283,15 +283,15 @@ function get_temp_config_file() {
 }
 
 function install_sing_box() {
-    if [[ -f "/usr/local/bin/sing-box" && -f "/usr/local/etc/sing-box/config.json" ]]; then
-        return 1
-    else
+    #if [[ -f "/usr/local/bin/sing-box" && -f "/usr/local/etc/sing-box/config.json" ]]; then
+    #    return 1
+    #else
         get_local_ip
         configure_dns64
         select_sing_box_install_option
         configure_sing_box_service
         create_sing_box_folders
-    fi
+    #fi
 }
 
 function configure_dns64() {

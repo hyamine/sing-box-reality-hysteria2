@@ -1093,8 +1093,11 @@ function apply_certificate() {
     if [[ -n "$ip_v4" ]]; then
         has_ipv4=true
     fi
-    echo "Requesting a certificate..."        
-    curl -s https://get.acme.sh | sh -s email=example@gmail.com 2>&1 | tail -n 1
+    echo "Requesting a certificate..."
+    if [ ! -n "$ACME_ACCOUNT" ]; then
+      ACME_ACCOUNT=mail_acme@gmail.com
+    fi
+    curl -s https://get.acme.sh | sh -s email=$ACME_ACCOUNT 2>&1 | tail -n 1
     alias acme.sh=~/.acme.sh/acme.sh
     for ca_server in "${ca_servers[@]}"; do
         echo "Requesting a certificate from $ca_server..."
